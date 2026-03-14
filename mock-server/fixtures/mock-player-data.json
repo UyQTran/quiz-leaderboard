@@ -1,0 +1,48 @@
+{
+  "playerList": [
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Marte Holmsen"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Fredrik Billingsen"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Erik Hansen"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Anne Johansen"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Henrik Larsen"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Thor Fjellstad"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Birgitte Lillefjord"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "John Pedersen"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Uy Tran"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Gunnar Larson"
+    },
+    {
+      "playerId": "e8c1aa98-6379-4820-828a-aa78715ea2e0",
+      "playerName": "Geir Killestad"
+    }
+  ]
+}
