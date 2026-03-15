@@ -2,13 +2,19 @@ import express, {Request, Response} from 'express';
 import cors from 'cors';
 import playerDataFixture from './fixtures/mock-player-data.json';
 import rankingDataFixture from './fixtures/mock-ranking-data.json';
+import tierDataFixture from './fixtures/mock-tier-data.json';
 import { PlayerDataModel } from '../src/app/models/player-data-model';
 import { RankingDataModel } from '../src/app/models/ranking-data-model';
+import { TierDataModel } from '../src/app/models/tier-data-model';
 
 const mockPlayerData = playerDataFixture as PlayerDataModel;
 const mockRankingData = rankingDataFixture as RankingDataModel;
+const mockTierData = tierDataFixture as TierDataModel;
 
-type DataModel = PlayerDataModel | RankingDataModel;
+type DataModel =
+  PlayerDataModel |
+  RankingDataModel |
+  TierDataModel;
 
 const mockServer = express();
 
@@ -41,6 +47,13 @@ mockServer.get('/api/rankings', (req: Request, res: Response): void => {
   setupSseHeaders(res);
   const emit = createSseEmitter(res);
   emit(mockRankingData);
+});
+
+
+mockServer.get('/api/tiers', (req: Request, res: Response): void => {
+  setupSseHeaders(res);
+  const emit = createSseEmitter(res);
+  emit(mockTierData);
 });
 
 const mockServerPort = 8080;

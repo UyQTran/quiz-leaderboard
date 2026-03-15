@@ -1,0 +1,23 @@
+{
+  "tierList": [
+    {
+      "tierId": "54fe17ff-99c7-4ef8-a529-bcf07d023487",
+      "tierName": "Gold",
+      "tierThreshold": {
+        "topRankings": 3
+      }
+    },
+    {
+      "tierId": "9aba22dc-800b-41db-a0cf-ae343746ec5b",
+      "tierName": "Silver",
+      "tierThreshold": {
+        "minimumPoints": 10
+      }
+    },
+    {
+      "tierId": "ec7923a3-2540-419d-9960-d671d2615a7d",
+      "tierName": "Bronze",
+      "tierThreshold": {}
+    }
+  ]
+}
