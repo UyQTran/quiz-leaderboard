@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "mocks:start": "npx ts-node --project ./cypress/tsconfig.mock.json ./cypress/mock-server.ts"
+    "mocks:start": "npx ts-node --project ./mock-server/tsconfig.mock.json ./mock-server/mock-server.ts"
   },
   "private": true,
   "packageManager": "npm@10.9.2",
