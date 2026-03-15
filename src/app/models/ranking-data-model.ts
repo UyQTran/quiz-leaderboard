@@ -11,5 +11,4 @@ export interface Ranking {
   rankingId: RankingId;
   playerId: PlayerId;
   points: Points;
-  lastUpdated: Date;
 }
