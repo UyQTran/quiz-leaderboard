@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -11,6 +11,7 @@ import {
   MatRowDef,
   MatTable
 } from '@angular/material/table';
+import { PlayerDataFetcher } from '../../services/player-data-fetcher';
 
 @Component({
   selector: 'app-leaderboard',
@@ -30,6 +31,7 @@ import {
   styleUrl: './leaderboard.scss',
 })
 export class Leaderboard {
+  playerData = inject(PlayerDataFetcher);
   displayedColumns: string[] = ['name', 'points'];
   dataSource = [
     {name: 'Player 1', points: 100},
