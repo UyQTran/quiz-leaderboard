@@ -6,6 +6,7 @@ import tierDataFixture from './fixtures/mock-tier-data.json';
 import { PlayerDataModel } from '../src/app/models/player-data-model';
 import { RankingDataModel } from '../src/app/models/ranking-data-model';
 import { TierDataModel } from '../src/app/models/tier-data-model';
+import { interval } from 'rxjs';
 
 const mockPlayerData = playerDataFixture as PlayerDataModel;
 const mockRankingData = rankingDataFixture as RankingDataModel;
@@ -21,9 +22,9 @@ const mockServer = express();
 mockServer.use(cors());
 mockServer.use(express.json());
 
-function createSseEmitter(res: Response): (event: DataModel) => void {
-  return function emit(event): void {
-    res.write(`data: ${JSON.stringify(event)}`);
+function createSseEmitter(res: Response): (event: DataModel, eventType: string) => void {
+  return function emit(event: DataModel, eventType: string): void {
+    res.write(`event: ${eventType}\ndata: ${JSON.stringify(event)}`);
     res.write(`\n\n`);
   };
 }
@@ -37,23 +38,20 @@ function setupSseHeaders(res: Response): void {
   res.write('retry: 10000\n\n');
 }
 
-mockServer.get('/api/players', (req: Request, res: Response): void => {
+function getRandomizedRanking() {
+  const rankingList = mockRankingData.rankingList;
+  const randomizedRanking = rankingList[Math.floor(Math.random() * rankingList.length)]
+  randomizedRanking.points = Math.floor(Math.random() * 200)
+  return {rankingList: [randomizedRanking]};
+}
+
+mockServer.get('/api/stream', (req: Request, res: Response): void => {
   setupSseHeaders(res);
   const emit = createSseEmitter(res);
-  emit(mockPlayerData);
-});
-
-mockServer.get('/api/rankings', (req: Request, res: Response): void => {
-  setupSseHeaders(res);
-  const emit = createSseEmitter(res);
-  emit(mockRankingData);
-});
-
-
-mockServer.get('/api/tiers', (req: Request, res: Response): void => {
-  setupSseHeaders(res);
-  const emit = createSseEmitter(res);
-  emit(mockTierData);
+  emit(mockPlayerData, 'Player');
+  emit(mockRankingData, 'Ranking');
+  emit(mockTierData, 'Tier');
+  setInterval(() => emit(getRandomizedRanking(), 'Ranking'), 30_000)
 });
 
 const mockServerPort = 8080;
