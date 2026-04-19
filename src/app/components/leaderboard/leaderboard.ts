@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -11,7 +11,7 @@ import {
   MatRowDef,
   MatTable
 } from '@angular/material/table';
-import { PlayerDataFetcher } from '../../services/player-data-fetcher';
+import { DataFetcher } from '../../services/data-fetcher';
 
 @Component({
   selector: 'app-leaderboard',
@@ -31,11 +31,17 @@ import { PlayerDataFetcher } from '../../services/player-data-fetcher';
   styleUrl: './leaderboard.scss',
 })
 export class Leaderboard {
-  playerData = inject(PlayerDataFetcher);
+  playerData = inject(DataFetcher);
   displayedColumns: string[] = ['name', 'points'];
-  dataSource = [
-    {name: 'Player 1', points: 100},
-    {name: 'Player 2', points: 50},
-    {name: 'Player 3', points: 40},
-  ];
+  dataSource = computed(() => {
+    console.log(this.playerData.playerDataBuffer().playerList)
+    console.log(this.playerData.rankingDataBuffer().rankingList)
+    return this.playerData.playerDataBuffer().playerList.map((player) => {
+      const ranking = this.playerData.rankingDataBuffer().rankingList.find((ranking) => ranking.playerId === player.playerId)
+      if (!ranking) {
+        return {name: player.playerName, points: 0}
+      }
+      return {name: player.playerName, points: ranking.points}
+    })
+  })
 }
