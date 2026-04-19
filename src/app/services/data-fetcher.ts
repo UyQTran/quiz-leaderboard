@@ -9,21 +9,28 @@ import { RankingDataModel } from '../models/ranking-data-model';
 })
 export class DataFetcher {
   backendUrl = "http://localhost:8080/api/stream"
-  playerDataBuffer: WritableSignal<PlayerDataModel>
-  rankingDataBuffer: WritableSignal<RankingDataModel>
+  playerBuffer: WritableSignal<PlayerDataModel>
+  rankingBuffer: WritableSignal<RankingDataModel>
 
   constructor() {
-    this.playerDataBuffer = signal({playerList: []})
-    this.rankingDataBuffer = signal({rankingList: []})
+    this.playerBuffer = signal({playerList: []})
+    this.rankingBuffer = signal({rankingList: []})
     this.initStream()()
   }
   initStream() {
     const mapPlayerData = (playerData: PlayerDataModel) => {
-      this.playerDataBuffer.set(playerData);
+      this.playerBuffer.set(playerData);
     }
     const mapRankingData = (rankingData: RankingDataModel) => {
-      this.rankingDataBuffer.set(rankingData);
-      console.log(rankingData)
+      const updatedRankingBuffer = rankingData.rankingList
+        .reduce((acc, ranking) => {
+          const existingRankingIndex = acc.findIndex((accRanking) => accRanking.rankingId === ranking.rankingId)
+          if (existingRankingIndex >= 0)
+            acc[existingRankingIndex] = ranking
+          else acc.push(ranking)
+          return acc
+        }, this.rankingBuffer().rankingList)
+      this.rankingBuffer.set({rankingList: updatedRankingBuffer});
     }
     return computed(() => {
       return fetchEventSource(this.backendUrl, {

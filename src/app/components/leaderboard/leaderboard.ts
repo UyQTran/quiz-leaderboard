@@ -34,10 +34,10 @@ export class Leaderboard {
   playerData = inject(DataFetcher);
   displayedColumns: string[] = ['name', 'points'];
   dataSource = computed(() => {
-    console.log(this.playerData.playerDataBuffer().playerList)
-    console.log(this.playerData.rankingDataBuffer().rankingList)
-    return this.playerData.playerDataBuffer().playerList.map((player) => {
-      const ranking = this.playerData.rankingDataBuffer().rankingList.find((ranking) => ranking.playerId === player.playerId)
+    console.log(this.playerData.playerBuffer().playerList)
+    console.log(this.playerData.rankingBuffer().rankingList)
+    return this.playerData.playerBuffer().playerList.map((player) => {
+      const ranking = this.playerData.rankingBuffer().rankingList.find((ranking) => ranking.playerId === player.playerId)
       if (!ranking) {
         return {name: player.playerName, points: 0}
       }

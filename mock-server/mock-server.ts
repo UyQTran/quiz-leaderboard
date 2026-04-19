@@ -51,7 +51,7 @@ mockServer.get('/api/stream', (req: Request, res: Response): void => {
   emit(mockPlayerData, 'Player');
   emit(mockRankingData, 'Ranking');
   emit(mockTierData, 'Tier');
-  setInterval(() => emit(getRandomizedRanking(), 'Ranking'), 30_000)
+  setInterval(() => emit(getRandomizedRanking(), 'Ranking'), 1_000)
 });
 
 const mockServerPort = 8080;
