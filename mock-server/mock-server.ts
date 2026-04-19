@@ -40,9 +40,14 @@ function setupSseHeaders(res: Response): void {
 
 function getRandomizedRanking() {
   const rankingList = mockRankingData.rankingList;
-  const randomizedRanking = rankingList[Math.floor(Math.random() * rankingList.length)]
-  randomizedRanking.points = Math.floor(Math.random() * 200)
-  return {rankingList: [randomizedRanking]};
+  const randomElementCount = Math.floor(Math.random() * 3)
+  const randomizedRankingList = []
+  for (let i = 0; i < randomElementCount; i++) {
+    const randomizedRanking = rankingList[Math.floor(Math.random() * rankingList.length)]
+    randomizedRanking.points = Math.floor(Math.random() * 200)
+    randomizedRankingList.push(randomizedRanking)
+  }
+  return {rankingList: randomizedRankingList};
 }
 
 mockServer.get('/api/stream', (req: Request, res: Response): void => {
