@@ -38,22 +38,20 @@ export class DataFetcher {
     const mapTierData = (tierData: TierDataModel) => {
       this.tierBuffer.set(tierData);
     }
-    effect(() => {
-      return fetchEventSource(this.backendUrl, {
-        onmessage(ev) {
-          switch (ev.event) {
-            case 'Player':
-              mapPlayerData(JSON.parse(ev.data))
-              break;
-            case 'Ranking':
-              mapRankingData(JSON.parse(ev.data))
-              break;
-            case 'Tier':
-              mapTierData(JSON.parse(ev.data))
-              break;
-          }
+    fetchEventSource(this.backendUrl, {
+      onmessage(ev) {
+        switch (ev.event) {
+          case 'Player':
+            mapPlayerData(JSON.parse(ev.data))
+            break;
+          case 'Ranking':
+            mapRankingData(JSON.parse(ev.data))
+            break;
+          case 'Tier':
+            mapTierData(JSON.parse(ev.data))
+            break;
         }
-      });
+      }
     });
   }
 }

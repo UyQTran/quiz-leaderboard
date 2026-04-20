@@ -33,13 +33,13 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './leaderboard.scss',
 })
 export class Leaderboard {
-  playerData = inject(DataFetcher);
+  dataFetcher = inject(DataFetcher);
   displayedColumns: string[] = ['name', 'points', 'tier'];
   dataSource = computed(() => {
-    return this.playerData
+    return this.dataFetcher
       .playerBuffer()
       .playerList.map((player) => {
-        const ranking = this.playerData
+        const ranking = this.dataFetcher
           .rankingBuffer()
           .rankingList.find((ranking) => ranking.playerId === player.playerId);
         if (!ranking) {
@@ -50,7 +50,7 @@ export class Leaderboard {
       .sort((a, b) => b.points - a.points)
       .map((row, index) => {
         let rowTier = 'none'
-        this.playerData.tierBuffer().tierList.forEach((tier) => {
+        this.dataFetcher.tierBuffer().tierList.forEach((tier) => {
           const minimumPoints = tier.tierThreshold.minimumPoints
           if (minimumPoints && minimumPoints <= row.points)
             rowTier = tier.tierName
