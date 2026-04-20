@@ -1,4 +1,4 @@
-import { computed, Injectable, signal, WritableSignal } from '@angular/core';
+import { computed, effect, Injectable, signal, WritableSignal } from '@angular/core';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import { PlayerDataModel } from '../models/player-data-model';
 import { RankingDataModel } from '../models/ranking-data-model';
@@ -18,7 +18,7 @@ export class DataFetcher {
     this.playerBuffer = signal({playerList: []})
     this.rankingBuffer = signal({rankingList: []})
     this.tierBuffer = signal({tierList: []})
-    this.initStream()()
+    this.initStream()
   }
   initStream() {
     const mapPlayerData = (playerData: PlayerDataModel) => {
@@ -38,7 +38,7 @@ export class DataFetcher {
     const mapTierData = (tierData: TierDataModel) => {
       this.tierBuffer.set(tierData);
     }
-    return computed(() => {
+    effect(() => {
       return fetchEventSource(this.backendUrl, {
         onmessage(ev) {
           switch (ev.event) {
