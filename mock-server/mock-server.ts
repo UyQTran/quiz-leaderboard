@@ -2,19 +2,15 @@ import express, {Request, Response} from 'express';
 import cors from 'cors';
 import playerDataFixture from './fixtures/mock-player-data.json';
 import rankingDataFixture from './fixtures/mock-ranking-data.json';
-import tierDataFixture from './fixtures/mock-tier-data.json';
 import { PlayerDataModel } from '../src/app/models/player-data-model';
 import { RankingDataModel } from '../src/app/models/ranking-data-model';
-import { TierDataModel } from './tier-data-model';
 
 const mockPlayerData = playerDataFixture as PlayerDataModel;
 const mockRankingData = rankingDataFixture as RankingDataModel;
-const mockTierData = tierDataFixture as TierDataModel;
 
 type DataModel =
   PlayerDataModel |
-  RankingDataModel |
-  TierDataModel;
+  RankingDataModel;
 
 const mockServer = express();
 
@@ -54,7 +50,6 @@ mockServer.get('/api/stream', (req: Request, res: Response): void => {
   const emit = createSseEmitter(res);
   emit(mockPlayerData, 'Player');
   emit(mockRankingData, 'Ranking');
-  emit(mockTierData, 'Tier');
   setInterval(() => emit(getRandomizedRanking(), 'Ranking'), 1_000)
 });
 
