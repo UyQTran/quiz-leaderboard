@@ -1,4 +1,4 @@
-import { computed, effect, Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import { PlayerDataModel } from '../models/player-data-model';
 import { RankingDataModel } from '../models/ranking-data-model';
