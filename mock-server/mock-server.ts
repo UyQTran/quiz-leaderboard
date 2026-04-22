@@ -5,7 +5,7 @@ import rankingDataFixture from './fixtures/mock-ranking-data.json';
 import tierDataFixture from './fixtures/mock-tier-data.json';
 import { PlayerDataModel } from '../src/app/models/player-data-model';
 import { RankingDataModel } from '../src/app/models/ranking-data-model';
-import { TierDataModel } from '../src/app/models/tier-data-model';
+import { TierDataModel } from './tier-data-model';
 
 const mockPlayerData = playerDataFixture as PlayerDataModel;
 const mockRankingData = rankingDataFixture as RankingDataModel;
