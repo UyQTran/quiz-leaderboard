@@ -22,15 +22,7 @@ export class DataFetcher {
       this.playerBuffer.set(playerData);
     }
     const mapRankingData = (rankingData: RankingDataModel) => {
-      const updatedRankingBuffer = rankingData.rankingList
-        .reduce((acc, ranking) => {
-          const existingRankingIndex = acc.findIndex((accRanking) => accRanking.rankingId === ranking.rankingId)
-          if (existingRankingIndex >= 0)
-            acc[existingRankingIndex] = ranking
-          else acc.push(ranking)
-          return acc
-        }, this.rankingBuffer().rankingList)
-      this.rankingBuffer.set({rankingList: updatedRankingBuffer});
+      this.rankingBuffer.set(rankingData);
     }
     fetchEventSource(this.backendUrl, {
       onmessage(ev) {
