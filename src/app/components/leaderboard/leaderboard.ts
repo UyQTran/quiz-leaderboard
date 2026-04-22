@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core'
+import { Component } from '@angular/core'
 import {
   MatCell,
   MatCellDef,
@@ -11,7 +11,6 @@ import {
   MatRowDef,
   MatTable
 } from '@angular/material/table'
-import { DataFetcher } from '../../services/data-fetcher'
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -33,20 +32,10 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './leaderboard.scss',
 })
 export class Leaderboard {
-  dataFetcher = inject(DataFetcher);
   displayedColumns: string[] = ['name', 'points'];
-  dataSource = computed(() => {
-    return this.dataFetcher
-      .playerBuffer()
-      .playerList.map((player) => {
-        const ranking = this.dataFetcher
-          .rankingBuffer()
-          .rankingList.find((ranking) => ranking.playerId === player.playerId);
-        if (!ranking) {
-          return { name: player.playerName, points: 0 };
-        }
-        return { name: player.playerName, points: ranking.points };
-      })
-      .sort((a, b) => b.points - a.points);
-  });
+  dataSource = [
+    {name: 'Player 1', points: 100},
+    {name: 'Player 2', points: 50},
+    {name: 'Player 3', points: 40},
+  ];
 }
