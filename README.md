@@ -117,8 +117,10 @@ basert signal-variabler den lytter som gjør at `computed` returnerer en strøm 
 oppdatert og får en ny verdi hver gang en av signal-variablene får en ny verdi.
 
 Lag et `computed` kall for `dataSource` variablen i leaderboard.ts og lytt på `dataFetcher.playerBuffer()` og 
-`dataFetcher.rankingBuffer()` slik at tabellen får dataene i riktig format. Du må derfor slå opp og nullhåndtere for
-de ulike strømmene.
+`dataFetcher.rankingBuffer()` slik at tabellen får dataene i riktig format. Her kreves det at du mapper over den ene eller
+den andre strømmen for å kunne slå sammen dataene og slik at du får dataene i det formatet beskrevet over. Du må derfor 
+slå opp og nullhåndtere for de ulike strømmene. Etter at du har laget `computed` kall, må du nå kalle på `dataSource()`
+med paranteser i `leaderboard.html` for å tilføre dataene til tabellen fordi `dataSource()` er nå en strøm av data.
 
 Til slutt kan du sortere elementene i tabellisten etter poengsum. Etter dette skal tabellen i webappen være oppdatert 
 med data fra backend.
