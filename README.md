@@ -179,7 +179,7 @@ Når du har lagret disse dataene, kan du oppdatere `Leaderboard`-komponenten med
 
 I HTML-filen til leaderboard, må du også legge til en ny kolonne. Dette kan gjøre på flere måter. Her er et eksempel med ikon
 fra Material
-```
+``` html
 @let tier = element.tier;
 <mat-icon
   aria-hidden="false"
@@ -190,6 +190,25 @@ fra Material
   [class.bronze-tier]="tier === 'bronze'"
   [class.no-tier]="tier === 'none'"
 ></mat-icon>
+```
+
+Legg også til følgende css klasser i `leaderboard.scss`
+``` css
+.gold-tier {
+  color: #b8b029
+}
+
+.silver-tier {
+  color: #606060
+}
+
+.bronze-tier {
+  color: #835a00
+}
+
+.no-tier {
+  display: none;
+}
 ```
 Linjen med @let er en Javascript linje som akspeterer både funksjoner og uttrykk. Når du definerer et HTML attributt i enten
 parantes eller klammeparantes blir dette også oversatt av Angular som Javascript. I dette tilfellet toggler vi av eller på
