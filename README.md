@@ -169,7 +169,7 @@ dataene.
 Lag en ny Typescript-model tilsvarende de andre modellene. Så kan du legge til den nye strømmen i data-fetcher.ts. Det er ikke
 noe spesiell logikk som kreves her.
 
-Når du har lagret disse dataene, kan du oppdatere leaderboar-komponenten med en ny kolonne. Dette gjør du både i 
+Når du har lagret disse dataene, kan du oppdatere leaderboard-komponenten med en ny kolonne. Dette gjør du både i 
 `displayedColumns` variabelen.
 
 I HTML-filen til leaderboard, må du også legge til en ny kolonne. Dette kan gjøre på flere måter. Her er et eksempel med ikon
