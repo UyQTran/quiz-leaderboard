@@ -33,11 +33,24 @@ function setupSseHeaders(res: Response): void {
   res.write('retry: 10000\n\n');
 }
 
+function getRandomizedRanking() {
+  const rankingList = mockRankingData.rankingList;
+  const randomElementCount = Math.floor(Math.random() * 3)
+  const randomizedRankingList = []
+  for (let i = 0; i < randomElementCount; i++) {
+    const randomizedRanking = rankingList[Math.floor(Math.random() * rankingList.length)]
+    randomizedRanking.points = Math.floor(Math.random() * 200)
+    randomizedRankingList.push(randomizedRanking)
+  }
+  return {rankingList: randomizedRankingList};
+}
+
 mockServer.get('/api/stream', (req: Request, res: Response): void => {
   setupSseHeaders(res);
   const emit = createSseEmitter(res);
   emit(mockPlayerData, 'Player');
   emit(mockRankingData, 'Ranking');
+  setInterval(() => emit(getRandomizedRanking(), 'Ranking'), 1_000)
 });
 
 const mockServerPort = 8080;
