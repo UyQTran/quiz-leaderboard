@@ -9,21 +9,6 @@
         <th mat-header-cell *matHeaderCellDef> Points </th>
         <td mat-cell *matCellDef="let element"> {{element.points}} </td>
       </ng-container>
-      <ng-container matColumnDef="tier">
-        <th mat-header-cell *matHeaderCellDef> Tier </th>
-        <td mat-cell *matCellDef="let element">
-          @let tier = element.tier;
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Tier"
-            fontIcon="stars"
-            [class.gold-tier]="tier === 'gold'"
-            [class.silver-tier]="tier === 'silver'"
-            [class.bronze-tier]="tier === 'bronze'"
-            [class.no-tier]="tier === 'none'"
-          ></mat-icon>
-        </td>
-      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

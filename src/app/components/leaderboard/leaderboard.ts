@@ -34,7 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class Leaderboard {
   dataFetcher = inject(DataFetcher);
-  displayedColumns: string[] = ['name', 'points', 'tier'];
+  displayedColumns: string[] = ['name', 'points'];
   dataSource = computed(() => {
     return this.dataFetcher
       .playerBuffer()
@@ -47,19 +47,6 @@ export class Leaderboard {
         }
         return { name: player.playerName, points: ranking.points };
       })
-      .sort((a, b) => b.points - a.points)
-      .map((row, index) => {
-        let rowTier = 'none'
-        this.dataFetcher.tierBuffer().tierList.forEach((tier) => {
-          const minimumPoints = tier.tierThreshold.minimumPoints
-          if (minimumPoints && minimumPoints <= row.points)
-            rowTier = tier.tierName
-
-          const topRankings = tier.tierThreshold.topRankings
-          if (topRankings && topRankings > index)
-            rowTier = tier.tierName
-        })
-        return {...row, tier: rowTier}
-      });
+      .sort((a, b) => b.points - a.points);
   });
 }
